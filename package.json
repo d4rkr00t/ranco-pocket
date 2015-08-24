@@ -1,0 +1,34 @@
+{
+  "name": "rander-pocket",
+  "version": "0.0.0",
+  "description": "Pocket transport for rander",
+  "main": "index.js",
+  "license": "MIT",
+  "repository": "d4rkr00t/rander-pocket",
+  "scripts": {
+    "audit": "nsp package",
+    "babel-node": "babel-node",
+    "build": "babel -d ./ ./src",
+    "check": "npm run audit && npm outdated --depth 0",
+    "cov": "babel-node ./node_modules/.bin/isparta cover --report lcovonly --report html _mocha -- test/*.test.js -r test/setup.js",
+    "coveralls": "npm run cov && cat ./coverage/lcov.info | coveralls && rm -rf ./coverage",
+    "lint": "eslint src test",
+    "precheck": "npm run validate",
+    "prepublish": "npm run readme | npm run build",
+    "readme": "node ./node_modules/node-readme/bin/node-readme.js",
+    "test": "mocha test/*.test.js -r babel/register -r test/setup.js",
+    "validate": "npm run lint && npm run build && npm test"
+  },
+  "keywords": [
+    "rander",
+    "pocket"
+  ],
+  "author": {
+    "name": "Stanislav Sysoev",
+    "email": "d4rkr00t@gmail.com",
+    "url": "http://github.com/d4rkr00t"
+  },
+  "pre-commit": [
+    "lint"
+  ]
+}
