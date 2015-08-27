@@ -52,7 +52,8 @@ export function results(messages, list) {
   list.forEach(item => {
     const title = item.resolved_title || item.given_title;
     const url = item.resolved_url || item.given_url;
+    const pocketUrl = `https://getpocket.com/a/read/${item.item_id}`;
 
-    messages.result(title, url);
+    messages.result(title, `${url} — ${pocketUrl}`);
   });
 }

@@ -52,7 +52,8 @@ function results(messages, list) {
   list.forEach(function (item) {
     var title = item.resolved_title || item.given_title;
     var url = item.resolved_url || item.given_url;
+    var pocketUrl = 'https://getpocket.com/a/read/' + item.item_id;
 
-    messages.result(title, url);
+    messages.result(title, url + ' — ' + pocketUrl);
   });
 }
