@@ -18,14 +18,12 @@ var _tokens = require('./tokens');
 
 var _tokens2 = _interopRequireDefault(_tokens);
 
-var _commandsFavorite = require('./commands/favorite');
+var _commands = require('./commands');
 
-var _commandsFavorite2 = _interopRequireDefault(_commandsFavorite);
-
-var NAME = 'pocket';
+var _commands2 = _interopRequireDefault(_commands);
 
 function help() {
-  return ['fav -c <count> — show count | 1 random favorite entry from pocket.'];
+  return ['any -c <count> — random entry from pocket', 'fav -c <count> — random favorite entry from pocket', 'archive -c <count> -f — random favorite entry from pocket if -f search in favorites.', 'article -c <count> -f — random article from pocket if -f search in favorites', 'image -c <count> -f — random image from pocket if -f search in favorites', 'video -c <count> -f — random video from pocket if -f search in favorites'];
 }
 
 function setup(args, flags, config, imports) {
@@ -56,26 +54,14 @@ function setup(args, flags, config, imports) {
 }
 
 function run(args, flags, config, imports) {
-  var commonMessages = imports.messages;
   var moduleMessages = _messages2['default'](imports);
 
-  var _args2 = _slicedToArray(args, 1);
-
-  var command = _args2[0];
-  var count = flags.c;
+  var command = args.shift();
 
   if (!config.accessToken || !config.consumerKey) {
     moduleMessages.needSetup(config.accessToken, config.consumerKey);
     return null;
   }
 
-  switch (command) {
-    case 'fav':
-      return _commandsFavorite2['default']({ count: count }, config, imports);
-    default:
-      commonMessages.commandNotFound(NAME, command);
-      commonMessages.help(NAME, help());
-
-      return Promise.reject('Command not found');
-  }
+  _commands2['default'](command, args, flags, config, imports);
 }
