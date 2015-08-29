@@ -1,45 +1,57 @@
-import * as moduleMessages from './messages';
+import moduleMessagesCreator from './messages';
 import tokens from './tokens';
 
 import favorite from './commands/favorite';
 
-export function setup(params, config, imports) {
-  const messages = imports.messages;
-  const request = imports.request;
+const NAME = 'pocket';
 
-  const [consumerKey] = params;
+export function help() {
+  return [
+    'fav -c <count> — show count | 1 random favorite entry from pocket.'
+  ];
+}
+
+export function setup(args, flags, config, imports) {
+  const moduleMessages = moduleMessagesCreator(imports);
+  const { messages, request } = imports;
+
+  const [consumerKey] = args;
 
   if (!consumerKey) {
-    moduleMessages.noConsumerKey(messages);
+    moduleMessages.noConsumerKey();
     return;
   }
 
   if (!config.accessToken || !config.consumerKey) {
-    moduleMessages.start(messages);
+    moduleMessages.start();
 
-    tokens(request, messages, consumerKey)
-      .then(accessToken => moduleMessages.accessToken(messages, accessToken, consumerKey))
+    tokens(request, moduleMessages, consumerKey)
+      .then(accessToken => moduleMessages.accessToken(accessToken, consumerKey))
       .catch(err => messages.error(err.message));
   } else {
-    moduleMessages.noNeedSetup(messages);
+    messages.noNeedSetup();
   }
 }
 
-export function run(params, config, imports) {
-  const messages = imports.messages;
+export function run(args, flags, config, imports) {
+  const commonMessages = imports.messages;
+  const moduleMessages = moduleMessagesCreator(imports);
 
-  const [command, ...options] = params;
+  const [command] = args;
+  const { c: count } = flags;
 
   if (!config.accessToken || !config.consumerKey) {
-    moduleMessages.needSetup(messages, config.accessToken, config.consumerKey);
+    moduleMessages.needSetup(config.accessToken, config.consumerKey);
     return null;
   }
 
   switch (command) {
   case 'fav':
-    return favorite(options, config, imports);
+    return favorite({ count }, config, imports);
   default:
-    moduleMessages.commandNotFound(messages, command);
+    commonMessages.commandNotFound(NAME, command);
+    commonMessages.help(NAME, help());
+
     return Promise.reject('Command not found');
   }
 }

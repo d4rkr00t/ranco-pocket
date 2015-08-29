@@ -1,59 +1,63 @@
-export function needSetup(messages, token, consumerKey) {
-  const msg = [];
+export default function setupModuleMessages(imports) {
+  const messages = imports.messages;
 
-  if (!token) {
-    msg.push('no access token');
-  }
+  return {
+    needSetup(token, consumerKey) {
+      const msg = [];
 
-  if (!consumerKey) {
-    msg.push('no consumer key');
-  }
+      if (!token) {
+        msg.push('no access token');
+      }
 
-  messages.warning(`There is ${msg.join(' and ')} in .randerrc. Please try to run -> rander pocket setup`);
-}
+      if (!consumerKey) {
+        msg.push('no consumer key');
+      }
 
-export function noConsumerKey(messages) {
-  messages.warning(
-    `You should pass consumer key as argument -> rander setup pocket consumer_key.
-To generate consumer key go to https://getpocket.com/developer/ and create app.
-`
-  );
-}
+      messages.warning(`There is ${msg.join(' and ')} in .randerrc. Please try to run -> rander pocket setup`);
+    },
 
-export function start(messages) {
-  messages.info('Pocket setup started.');
-}
+    noConsumerKey() {
+      messages.warning(
+        `You should pass consumer key as argument -> rander setup pocket consumer_key.
+To generate consumer key go to https://getpocket.com/developer/ and create app.`
+      );
+    },
 
-export function noNeedSetup(messages) {
-  messages.info('Access token exists. No need to setup again.');
-}
+    start() {
+      messages.info('Pocket setup started.');
+    },
 
-export function accessToken(messages, token, consumerKey) {
-  messages.info(
-    `Add access_token to your ~/.randerrc:
+    noNeedSetup() {
+      messages.info('Access token exists. No need to setup again.');
+    },
+
+    accessToken(token, consumerKey) {
+      messages.info(
+        `Add access_token to your ~/.randerrc:
 
 {
   "pocket": {
     "consumerKey": "${consumerKey}",
     "accessToken": "${token}"
   }
-}`);
-}
+}`
+      );
+    },
 
-export function serverStarted(messages, appUrl) {
-  messages.info(`Open ${appUrl} in your browser to complete setup.`);
-}
+    serverStarted(appUrl) {
+      messages.info(`Open ${appUrl} in your browser to complete setup.`);
+    },
 
-export function commandNotFound(messages, command) {
-  messages.error(`Command ${command} not found in rander-pocket transport.`);
-}
+    results(list) {
+      const chalk = imports.chalk;
 
-export function results(messages, list) {
-  list.forEach(item => {
-    const title = item.resolved_title || item.given_title;
-    const url = item.resolved_url || item.given_url;
-    const pocketUrl = `https://getpocket.com/a/read/${item.item_id}`;
+      messages.results(list.map(item => {
+        const title = item.resolved_title || item.given_title;
+        const url = item.resolved_url || item.given_url;
+        const pocketUrl = `https://getpocket.com/a/read/${item.item_id}`;
 
-    messages.result(title, `${url} — ${pocketUrl}`);
-  });
+        return `${title} — [ ${chalk.cyan(url)} ] [ ${chalk.gray(pocketUrl)} ]`;
+      }));
+    }
+  };
 }
