@@ -28,7 +28,7 @@ To generate consumer key go to https://getpocket.com/developer/ and create app.`
     },
 
     noNeedSetup() {
-      messages.info('Access token exists. No need to setup again.');
+      messages.info('Access token and consumer key exists. No need to setup again.');
     },
 
     accessToken(token, consumerKey) {

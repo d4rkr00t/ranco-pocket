@@ -30,7 +30,7 @@ function setupModuleMessages(imports) {
     },
 
     noNeedSetup: function noNeedSetup() {
-      messages.info('Access token exists. No need to setup again.');
+      messages.info('Access token and consumer key exists. No need to setup again.');
     },
 
     accessToken: function accessToken(token, consumerKey) {

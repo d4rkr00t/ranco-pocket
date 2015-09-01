@@ -30,9 +30,9 @@ export function setup(args, flags, config, imports) {
 
     tokens(request, moduleMessages, consumerKey)
       .then(accessToken => moduleMessages.accessToken(accessToken, consumerKey))
-      .catch(err => messages.error(err.message));
+      .catch(err => messages.error(err.stack));
   } else {
-    messages.noNeedSetup();
+    moduleMessages.noNeedSetup();
   }
 }
 

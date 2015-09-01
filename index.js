@@ -46,10 +46,10 @@ function setup(args, flags, config, imports) {
     _tokens2['default'](request, moduleMessages, consumerKey).then(function (accessToken) {
       return moduleMessages.accessToken(accessToken, consumerKey);
     })['catch'](function (err) {
-      return messages.error(err.message);
+      return messages.error(err.stack);
     });
   } else {
-    messages.noNeedSetup();
+    moduleMessages.noNeedSetup();
   }
 }
 

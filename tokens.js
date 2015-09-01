@@ -3,17 +3,11 @@
 exports.__esModule = true;
 exports['default'] = tokens;
 
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj['default'] = obj; return newObj; } }
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
 var _http = require('http');
 
 var _http2 = _interopRequireDefault(_http);
-
-var _messages = require('./messages');
-
-var moduleMessages = _interopRequireWildcard(_messages);
 
 var requestUrl = 'https://getpocket.com/v3/oauth/request';
 var authorizeUrl = 'https://getpocket.com/auth/authorize';
@@ -50,7 +44,7 @@ function getAccessToken(request, key, requestToken) {
 }
 
 function authorize(messages, requestToken) {
-  moduleMessages.serverStarted(messages, appUrl);
+  messages.serverStarted(appUrl);
 
   return new Promise(function (resolve) {
     var server = _http2['default'].createServer(function (req, res) {

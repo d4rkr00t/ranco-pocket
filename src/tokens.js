@@ -1,7 +1,5 @@
 import http from 'http';
 
-import * as moduleMessages from './messages';
-
 const requestUrl = 'https://getpocket.com/v3/oauth/request';
 const authorizeUrl = 'https://getpocket.com/auth/authorize';
 const authorizeApiUrl = 'https://getpocket.com/v3/oauth/authorize';
@@ -37,10 +35,10 @@ function getAccessToken(request, key, requestToken) {
 }
 
 function authorize(messages, requestToken) {
-  moduleMessages.serverStarted(messages, appUrl);
+  messages.serverStarted(appUrl);
 
   return new Promise(resolve => {
-    const server = http.createServer(function (req, res) {
+    const server = http.createServer((req, res) => {
       if (req.url === '/') {
         res.writeHead(301, {
           Location: `${authorizeUrl}?request_token=${requestToken}&redirect_uri=${returnUrl}`
