@@ -13,7 +13,7 @@ export default function setupModuleMessages(imports) {
         msg.push('no consumer key');
       }
 
-      messages.warning(`There is ${msg.join(' and ')} in .randerrc. Please try to run -> rander pocket setup`);
+      messages.warning(`There is ${msg.join(' and ')} in .randerrc. Please try to run -> rander setup pocket`);
     },
 
     noConsumerKey() {
