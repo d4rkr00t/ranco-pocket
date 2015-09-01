@@ -5,12 +5,20 @@ import execCommand from './commands';
 
 export function help() {
   return [
-    'any -c <count> — random entry from pocket',
-    'fav -c <count> — random favorite entry from pocket',
-    'archive -c <count> -f — random favorite entry from pocket if -f search in favorites.',
-    'article -c <count> -f — random article from pocket if -f search in favorites',
-    'image -c <count> -f — random image from pocket if -f search in favorites',
-    'video -c <count> -f — random video from pocket if -f search in favorites'
+    'Usage',
+    '  any      random entry from pocket',
+    '  fav      random favorite entry from pocket',
+    '  archive  random archive entry from pocket',
+    '  article  random article from pocket',
+    '  image    random image from pocket',
+    '  video    random video from pocket',
+    '',
+    'Transport specific options',
+    '  -f  turn on only favorite mode for archive, article, image and video commands [Default: false]',
+    '',
+    'Examples',
+    '  rander pocket fav -c 3         show 3 random favorite entry from pocket',
+    '  rander pocket article -c 3 -f  show 3 random favorite article from pocket'
   ];
 }
 
