@@ -23,7 +23,7 @@ var _commands = require('./commands');
 var _commands2 = _interopRequireDefault(_commands);
 
 function help() {
-  return ['Usage', '  any      random entry from pocket', '  fav      random favorite entry from pocket', '  archive  random archive entry from pocket', '  article  random article from pocket', '  image    random image from pocket', '  video    random video from pocket', '', 'Transport specific options', '  -f  turn on only favorite mode for archive, article, image and video commands [Default: false]', '', 'Examples', '  rander pocket fav -c 3         show 3 random favorite entry from pocket', '  rander pocket article -c 3 -f  show 3 random favorite article from pocket'];
+  return ['Usage', '  any      random entry from pocket', '  fav      random favorite entry from pocket', '  archive  random archive entry from pocket', '  article  random article from pocket', '  image    random image from pocket', '  video    random video from pocket', '', 'Transport specific options', '  -f  turn on only favorite mode for archive, article, image and video commands [Default: false]', '', 'Examples', '  ranco pocket fav -c 3         show 3 random favorite entry from pocket', '  ranco pocket article -c 3 -f  show 3 random favorite article from pocket'];
 }
 
 function setup(args, flags, config, imports) {

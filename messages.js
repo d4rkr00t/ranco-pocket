@@ -18,11 +18,11 @@ function setupModuleMessages(imports) {
         msg.push('no consumer key');
       }
 
-      messages.warning('There is ' + msg.join(' and ') + ' in .randerrc. Please try to run -> rander setup pocket');
+      messages.warning('There is ' + msg.join(' and ') + ' in .rancorc. Please try to run -> ranco setup pocket');
     },
 
     noConsumerKey: function noConsumerKey() {
-      messages.warning('You should pass consumer key as argument -> rander setup pocket consumer_key.\nTo generate consumer key go to https://getpocket.com/developer/ and create app.');
+      messages.warning('You should pass consumer key as argument -> ranco setup pocket consumer_key.\nTo generate consumer key go to https://getpocket.com/developer/ and create app.');
     },
 
     start: function start() {
@@ -34,7 +34,7 @@ function setupModuleMessages(imports) {
     },
 
     accessToken: function accessToken(token, consumerKey) {
-      messages.info('Add access_token to your ~/.randerrc:\n\n{\n  "pocket": {\n    "consumerKey": "' + consumerKey + '",\n    "accessToken": "' + token + '"\n  }\n}');
+      messages.info('Add access_token to your ~/.rancorc:\n\n{\n  "pocket": {\n    "consumerKey": "' + consumerKey + '",\n    "accessToken": "' + token + '"\n  }\n}');
     },
 
     serverStarted: function serverStarted(appUrl) {

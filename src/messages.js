@@ -13,12 +13,12 @@ export default function setupModuleMessages(imports) {
         msg.push('no consumer key');
       }
 
-      messages.warning(`There is ${msg.join(' and ')} in .randerrc. Please try to run -> rander setup pocket`);
+      messages.warning(`There is ${msg.join(' and ')} in .rancorc. Please try to run -> ranco setup pocket`);
     },
 
     noConsumerKey() {
       messages.warning(
-        `You should pass consumer key as argument -> rander setup pocket consumer_key.
+        `You should pass consumer key as argument -> ranco setup pocket consumer_key.
 To generate consumer key go to https://getpocket.com/developer/ and create app.`
       );
     },
@@ -33,7 +33,7 @@ To generate consumer key go to https://getpocket.com/developer/ and create app.`
 
     accessToken(token, consumerKey) {
       messages.info(
-        `Add access_token to your ~/.randerrc:
+        `Add access_token to your ~/.rancorc:
 
 {
   "pocket": {

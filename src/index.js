@@ -17,8 +17,8 @@ export function help() {
     '  -f  turn on only favorite mode for archive, article, image and video commands [Default: false]',
     '',
     'Examples',
-    '  rander pocket fav -c 3         show 3 random favorite entry from pocket',
-    '  rander pocket article -c 3 -f  show 3 random favorite article from pocket'
+    '  ranco pocket fav -c 3         show 3 random favorite entry from pocket',
+    '  ranco pocket article -c 3 -f  show 3 random favorite article from pocket'
   ];
 }
 
